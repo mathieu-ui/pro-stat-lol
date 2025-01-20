@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <title>API Query</title>
+</head>
+<body>
+<h1>Take care there are bobers here !</h1>
+
+
+<form action="out" method="post">
+    {% csrf_token %}
+    <input type="text" name="id" placeholder="Id" value="Mr Bark">#
+    <input type="text" name="tag" placeholder="Tag" value="turbo" maxlength="5">
+    <br>
+    <button type="submit">Afficher les masteries</button>
+    </form>
+<h2 style="color : red;">{{ error }}</h2>
+</body>
+</html>
