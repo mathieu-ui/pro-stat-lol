@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>API Query</title>
+</head>
+<body>
+    <h1>API Query</h1>
+    <form method="post">
+        {% csrf_token %}
+        <input type="text" name="query" placeholder="Enter your query">
+        <button type="submit">Get</button>
+    </form>
+    <div id="results"></div>
+</body>
+</html>
