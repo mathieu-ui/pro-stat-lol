@@ -9,6 +9,7 @@ def index(request):
 def out(request):
     id = request.POST['id']
     tag = request.POST['tag']
+    riotid = f"{id}#{tag}"
     output = lol.get_puuid_by_riot_id(id,tag)
 
     if output == None:
@@ -26,4 +27,4 @@ def out(request):
         big_list.append(lil_list.copy())
         lil_list.clear()
 
-    return render(request, 'app/querout.html', context={'output':output, 'all_champs':big_list})
+    return render(request, 'app/querout.html', context={'output':output, 'all_champs':big_list, 'riotid':riotid})

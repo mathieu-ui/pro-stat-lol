@@ -6,12 +6,11 @@
 </head>
 <body>
 
-
-{{ output }}
+<h1>Riot ID : {{riotid}}</h1>
 
 {% for c in all_champs %}
 <p>{{c.0}}</p>
-<p>{{c.1}}</p>
+
 {% if c.1 >= 100000 %}
     <img src="static/m10.webp" height="75">
   {% elif c.1 >= 90000 %}
@@ -20,9 +19,21 @@
     <img src="static/m8.webp" height="75">
   {% elif c.1 >= 70000 %}
     <img src="static/m7.webp" height="75">
+  {% elif c.1 >= 60000 %}
+    <img src="static/m6.webp" height="75">
+  {% elif c.1 >= 50000 %}
+    <img src="static/m5.webp" height="75">
+  {% elif c.1 >= 40000 %}
+    <img src="static/m4.webp" height="75">
+  {% elif c.1 >= 30000 %}
+    <img src="static/m3.webp" height="75">
+  {% elif c.1 >= 20000 %}
+    <img src="static/m2.webp" height="75">
   {% else %}
-    <p></p>
+    <img src="static/m1.webp" height="75">
   {% endif %}
+
+<p>{{c.1}}</p>
 <hr>
 {% endfor %}
 </body>
