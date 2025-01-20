@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <title>Result</title>
+</head>
+<body>
+
+
+{{ output }}
+
+{% for c in all_champs %}
+<p>{{c.0}}</p>
+<p>{{c.1}}</p>
+{% if c.1 >= 100000 %}
+    <img src="static/m10.webp" height="75">
+  {% elif c.1 >= 90000 %}
+    <img src="static/m9.webp" height="75">
+  {% elif c.1 >= 80000 %}
+    <img src="static/m8.webp" height="75">
+  {% elif c.1 >= 70000 %}
+    <img src="static/m7.webp" height="75">
+  {% else %}
+    <p></p>
+  {% endif %}
+<hr>
+{% endfor %}
+</body>
+</html>
