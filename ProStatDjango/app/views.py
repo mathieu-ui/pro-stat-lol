@@ -6,15 +6,29 @@ import app.scripts as lol
 def index(request):
     return render(request, 'app/index.html')
 
-def out(request):
-    id = request.POST['id']
-    tag = request.POST['tag']
+def error(request):
+    error = request.POST['error']
+    return render(request, 'app/error.html', context={'error': error})
+
+def masteries(request):
+    if 'id' in request.POST:
+        id = request.POST['id']
+        tag = request.POST['tag']
+    else:
+        error = "Vous n'avez rien à faire là !"
+        emote = "bee.webp"
+        return render(request, 'app/error.html', context={'error': error,'emote': emote})
     riotid = f"{id}#{tag}"
     output = lol.get_puuid_by_riot_id(id,tag)
 
     if output == None:
         error = "Le Riot ID ne semble pas exister."
-        return render(request, template_name='app/index.html', context={'error':error})
+        emote = "blitz.webp"
+        return render(request, template_name='app/error.html', context={'error':error,'emote': emote})
+    elif output == "token":
+        error = "Le token a expiré !"
+        emote = "teemo.webp"
+        return render(request, template_name='app/error.html', context={'error':error,'emote': emote})
 
     all_champs = lol.get_all_champs_infos(output)
     big_list = []

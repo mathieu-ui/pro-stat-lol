@@ -20,6 +20,8 @@ def get_puuid_by_riot_id(name, tag):
         a = response.json()
         print("PUUID OK")
         return a["puuid"]
+    elif response.status_code == 403:
+        return "token"
     else:
         print(f"Erreur {response.status_code}: {response.text}")
         return None
