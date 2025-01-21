@@ -87,7 +87,7 @@ def trouver_nom_par_id(id_recherche):
     return return_list
 
 def get_last_10_matches(puuid):
-    url = f"https://europe.api.riotgames.com/lol/match/v5/matches/by-puuid/{puuid}/ids?api_key={API_KEY}"
+    url = f"https://europe.api.riotgames.com/lol/match/v5/matches/by-puuid/{puuid}/ids?api_key={get_token()}"
     response = requests.get(url)
     print(response)
     if response.status_code == 200:
@@ -98,13 +98,13 @@ def get_last_10_matches(puuid):
         return []
 
 def get_match_info(match_id):
-    url = f"https://europe.api.riotgames.com/lol/match/v5/matches/{match_id}?api_key={API_KEY}"
+    url = f"https://europe.api.riotgames.com/lol/match/v5/matches/{match_id}?api_key={get_token()}"
     response = requests.get(url)
 
     return response.json()
 
 def match_to_json(match_id):
-    url = f"https://europe.api.riotgames.com/lol/match/v5/matches/{match_id}?api_key={API_KEY}"
+    url = f"https://europe.api.riotgames.com/lol/match/v5/matches/{match_id}?api_key={get_token()}"
     response = requests.get(url)
     match_data = response.json()
     with open("app/static/game.json", "w") as file:
