@@ -2,7 +2,23 @@ import requests
 from urllib.parse import quote
 import os, json
 
-API_KEY = "RGAPI-0c57ace7-91fa-4a42-b16f-b6b3414dc285"
+
+def get_token():
+    with open("app/config.json", 'r') as fichier:
+        data = json.load(fichier)
+    return data.get('token')
+
+def replace_token(new_token):
+    with open("app/config.json", 'r') as fichier:
+        data = json.load(fichier)
+
+    # Modifier la valeur de "token"
+    data['token'] = new_token
+
+    # Écrire les modifications dans le fichier JSON
+    with open("app/config.json", 'w') as fichier:
+        json.dump(data, fichier, indent=4)
+
 
 def get_puuid_by_riot_id(name, tag):
     BASE_URL = "https://europe.api.riotgames.com/riot/account/v1/accounts/by-riot-id"
@@ -11,7 +27,7 @@ def get_puuid_by_riot_id(name, tag):
     url = f"{BASE_URL}/{encoded_name}/{encoded_tag}"
 
     # Prépare les en-têtes avec la clé API
-    headers = {"X-Riot-Token": API_KEY}
+    headers = {"X-Riot-Token": get_token()}
 
     # Effectue la requête
     response = requests.get(url, headers=headers)
@@ -28,20 +44,20 @@ def get_puuid_by_riot_id(name, tag):
         return None
 
 def get_champ_infos(puuid,champ_id):
-    url = f"https://euw1.api.riotgames.com/lol/champion-mastery/v4/champion-masteries/by-puuid/{puuid}/by-champion/{champ_id}?api_key={API_KEY}"
+    url = f"https://euw1.api.riotgames.com/lol/champion-mastery/v4/champion-masteries/by-puuid/{puuid}/by-champion/{champ_id}?api_key={get_token()}"
     response = requests.get(url)
     print("Get Champ OK")
     return response.json()
 
 def get_all_champs_infos(puuid):
-    url = f"https://euw1.api.riotgames.com/lol/champion-mastery/v4/champion-masteries/by-puuid/{puuid}?api_key={API_KEY}"
+    url = f"https://euw1.api.riotgames.com/lol/champion-mastery/v4/champion-masteries/by-puuid/{puuid}?api_key={get_token()}"
     response = requests.get(url)
     print("All champs OK")
     return response.json()
 
 def get_riotid_from_puuid(puuid):
     # gameName, tagLine
-    url = f"https://europe.api.riotgames.com/riot/account/v1/accounts/by-puuid/{puuid}?api_key={API_KEY}"
+    url = f"https://europe.api.riotgames.com/riot/account/v1/accounts/by-puuid/{puuid}?api_key={get_token()}"
     response = requests.get(url)
 
     try:
