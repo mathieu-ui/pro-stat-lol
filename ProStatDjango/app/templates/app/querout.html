@@ -4,36 +4,87 @@
     <meta charset="UTF-8">
     <title>Masteries</title>
 </head>
+
+<style>
+
+.photo-container {
+  position: relative;
+  width: 400px; /* Largeur de la div */
+  height: 300px; /* Hauteur de la div */
+  overflow: hidden; /* Cache les débordements */
+}
+
+.background {
+  position: absolute; /* Permet un positionnement précis */
+  top: 50%; /* Centre verticalement */
+  left: 50%; /* Centre horizontalement */
+  transform: translate(-50%, -50%); /* Centrage exact */
+}
+
+.overlay {
+  position: absolute;
+  top: 0; /* Alignement en haut */
+  left: 50%; /* Centre horizontalement */
+  transform: translateX(-50%);
+  height: 100px; /* Définit la hauteur de l'image superposée */
+  object-fit: contain; /* Garde les proportions de l'image */
+}
+
+.text-overlay {
+  position: absolute;
+  bottom: 20px; /* Positionne le texte en bas avec une marge */
+  left: 50%; /* Centre horizontalement */
+  transform: translateX(-50%); /* Ajuste le centrage horizontal */
+  background-color: rgba(0, 0, 0, 0.5); /* Fond semi-transparent */
+  color: white; /* Couleur du texte */
+  padding: 10px 20px; /* Ajoute un espacement autour du texte */
+  border-radius: 5px; /* Arrondi les coins du fond */
+  font-family: Arial, sans-serif; /* Police du texte */
+  font-size: 16px; /* Taille du texte */
+  text-align: center; /* Centre le texte */
+}
+
+
+</style>
+
 <body>
 
 <h1>Riot ID : {{riotid}}</h1>
 
 {% for c in all_champs %}
-<p>{{c.0}}</p>
 
-{% if c.1 >= 100000 %}
-    <img src="static/m10.webp" height="75">
+<div class="photo-container">
+<img src="{{c.2}}" style="height: 300px" class="background">
+
+  {% if c.1 >= 100000 %}
+    <img src="static/m10.webp" height="75" class="overlay">
   {% elif c.1 >= 90000 %}
-    <img src="static/m9.webp" height="75">
+    <img src="static/m9.webp" height="75" class="overlay">
   {% elif c.1 >= 80000 %}
-    <img src="static/m8.webp" height="75">
+    <img src="static/m8.webp" height="75" class="overlay">
   {% elif c.1 >= 70000 %}
-    <img src="static/m7.webp" height="75">
+    <img src="static/m7.webp" height="75" class="overlay">
   {% elif c.1 >= 60000 %}
-    <img src="static/m6.webp" height="75">
+    <img src="static/m6.webp" height="75" class="overlay">
   {% elif c.1 >= 50000 %}
-    <img src="static/m5.webp" height="75">
+    <img src="static/m5.webp" height="75" class="overlay">
   {% elif c.1 >= 40000 %}
-    <img src="static/m4.webp" height="75">
+    <img src="static/m4.webp" height="75" class="overlay">
   {% elif c.1 >= 30000 %}
-    <img src="static/m3.webp" height="75">
+    <img src="static/m3.webp" height="75" class="overlay">
   {% elif c.1 >= 20000 %}
-    <img src="static/m2.webp" height="75">
+    <img src="static/m2.webp" height="75" class="overlay">
   {% else %}
-    <img src="static/m1.webp" height="75">
+    <img src="static/m1.webp" height="75"class="overlay">
   {% endif %}
 
-<p>{{c.1}}</p>
+  <div class="text-overlay">
+    <p>{{c.0}}</p>
+    <p>MP : {{c.1}}</p>
+  </div>
+</div>
+
+
 <hr>
 {% endfor %}
 </body>

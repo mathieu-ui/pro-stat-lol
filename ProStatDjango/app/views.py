@@ -34,10 +34,11 @@ def masteries(request):
     big_list = []
     for c in all_champs:
         lil_list = []
-        name = lol.trouver_nom_par_id(int(c["championId"]))
-        print(f"{c["championId"]},{name}")
-        lil_list.append(name)
+
+        data = lol.trouver_nom_par_id(int(c["championId"]))
+        lil_list.append(data[0])
         lil_list.append(c["championPoints"])
+        lil_list.append(data[1])
         big_list.append(lil_list.copy())
         lil_list.clear()
 
