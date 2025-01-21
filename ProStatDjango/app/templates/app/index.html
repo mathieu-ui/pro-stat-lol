@@ -11,7 +11,7 @@
             margin: 0;
             padding: 0;
             display: flex;
-            justify-content: center;
+            flex-direction: column;
             align-items: center;
             height: 100vh;
         }
@@ -72,11 +72,27 @@
         }
     </style>
 </head>
-<body>
-    <div class="form-container">
-        <h1>Bienvenue sur ProStat</h1>
 
-        <!-- Formulaire pour afficher les 10 derniers matchs -->
+<body>
+
+    <div style="display: flex; background-color: #90aacb; padding: 10px 20px; width: 100%; box-sizing: border-box;">
+        <a href="index" style="color: white; text-decoration: none; padding: 10px 15px; transition: background-color 0.3s;"
+           onmouseover="this.style.backgroundColor='#7398ca'"
+           onmouseout="this.style.backgroundColor=''">
+            Accueil
+        </a>
+        <a href="https://example.com" style="color: white; text-decoration: none; padding: 10px 15px; transition: background-color 0.3s;"
+           onmouseover="this.style.backgroundColor='#7398ca'"
+           onmouseout="this.style.backgroundColor=''">
+            Informations
+        </a>
+    </div>
+
+
+    <div class="form-container">
+        <h1>Bienvenue sur ProStat LoL</h1>
+
+
         <form action="action" method="post">
             {% csrf_token %}
             <label for="id">Nom du joueur :</label>
@@ -86,16 +102,14 @@
 
             <label for="action">Action :</label>
             <select name="action">
-                <option value="masteries">Masteries</option>
-                <option value="matchs">Matchs</option>
+                <option value="masteries">Maitrises des champions</option>
+                <option value="matchs">Historique des parties</option>
             </select>
 
             <button type="submit" name="research">Rechercher</button>
         </form>
 
-
-        <form action="token" method="post">
-
+        <form action="token" method="post" style="margin-top: 20px">
             {% if token_up %}
             <h3 style="color: rgba(68,198,91,0.84)">Etat du token : UP </h3>
             {% else %}
@@ -105,10 +119,8 @@
             {% csrf_token %}
             <label for="id">Token :</label>
             <input type="text" name="token" placeholder="RGAPI-0c57ace7-91fa-4a42-b16f-b6b3414dc285" required>
-         <button type="submit">Envoyer</button>
+            <button type="submit">Envoyer</button>
         </form>
-
-        <!-- Section pour afficher les erreurs -->
     </div>
 </body>
 </html>
