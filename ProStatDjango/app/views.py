@@ -7,7 +7,15 @@ from datetime import datetime
 import json
 
 def index(request):
-    return render(request, 'app/index.html')
+
+    query = lol.get_puuid_by_riot_id("Mr Bark", "turbo")
+
+    if query == "token":
+        token_up = 0
+    else:
+        token_up = 1
+
+    return render(request, 'app/index.html', context={'token_up':token_up})
 
 def error(request):
     error = request.POST['error']
@@ -184,3 +192,20 @@ def redirector(request):
         return render(request, 'app/index.html')
     else :
         return redirect('index')
+
+
+def add_token(request):
+    if 'token' in request.POST:
+        TOKEN = request.POST.get("token")
+        lol.replace_token(TOKEN)
+
+    query = lol.get_puuid_by_riot_id("Mr Bark","turbo")
+
+    if query == "token":
+        error = "Le token fourni n'est pas correct ! "
+        emote = "blitz.webp"
+        return render(request, template_name='app/error.html', context={'error': error, 'emote': emote})
+    else:
+        error = "Le token fourni fonctionne correctement !"
+        emote = "blitz.webp"
+        return render(request, template_name='app/error.html', context={'error': error, 'emote': emote})

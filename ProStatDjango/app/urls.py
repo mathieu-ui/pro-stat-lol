@@ -8,4 +8,5 @@ urlpatterns = [
     path('index', index),
     path('game/<str:game_code>', match_overview),
     path('action', redirector),
+    path('token', add_token),
 ]

@@ -93,6 +93,21 @@
             <button type="submit" name="research">Rechercher</button>
         </form>
 
+
+        <form action="token" method="post">
+
+            {% if token_up %}
+            <h3 style="color: greenyellow">Etat du token : UP </h3>
+            {% else %}
+            <h3 style="color: red">Etat du token : DOWN </h3>
+            {% endif %}
+
+            {% csrf_token %}
+            <label for="id">Token :</label>
+            <input type="text" name="token" placeholder="RGAPI-0c57ace7-91fa-4a42-b16f-b6b3414dc285" required>
+         <button type="submit">Envoyer</button>
+        </form>
+
         <!-- Section pour afficher les erreurs -->
     </div>
 </body>
