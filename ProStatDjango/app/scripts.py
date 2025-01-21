@@ -82,7 +82,7 @@ def trouver_nom_par_id(id_recherche):
         if row['name'] in fichier:  # Vérification si la chaîne est dans le nom du fichier
             files.append(f"static/loading/{fichier}")
     if len(files) == 0:
-        files.append("static/teemo.webp")
+        files.append("static/loading/Teemo.jpg")
     return_list.append(files[0])
     return return_list
 
