@@ -3,19 +3,88 @@
 <head>
     <meta charset="UTF-8">
     <title>Résultats des matchs</title>
+    <style>
+
+        /* Style global du corps de la page */
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #f4f4f9;
+    color: #333;
+}
+
+/* Titre principal */
+h1 {
+    text-align: center;
+    font-size: 2.5em;
+    color: #2c3e50;
+    margin-top: 20px;
+}
+
+/* Titre secondaire */
+h2 {
+    font-size: 1.8em;
+    color: #34495e;
+    margin: 20px 0 10px;
+    text-align: center;
+}
+
+/* Liste des matchs */
+ul {
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+/* Chaque élément de la liste */
+li {
+    margin: 10px 0;
+}
+
+/* Liens dans la liste */
+a {
+    text-decoration: none;
+    color: #3498db;
+    font-size: 1.1em;
+    padding: 10px 15px;
+    border-radius: 5px;
+    background-color: #ecf0f1;
+    transition: background-color 0.3s ease;
+}
+
+/* Effet au survol des liens */
+a:hover {
+    background-color: #2980b9;
+    color: white;
+}
+
+/* Mise en page et espacement */
+.container {
+    width: 80%;
+    margin: 0 auto;
+    padding: 20px;
+}
+
+
+    </style>
 </head>
 <body>
 <h1>Riot ID : {{ riotid }}</h1>
 
 {% if matches %}
-    <h2>10 Derniers Matchs :</h2>
+    <h2>15 Derniers Matchs :</h2>
     <ul>
         {% for match in matches %}
-            <li>Match ID : {{ match }}</li>
+            <li><a href="game/{{ match }}">{{ match }}</a></li>
         {% endfor %}
     </ul>
 {% else %}
     <p>Aucun match trouvé.</p>
 {% endif %}
+
 </body>
 </html>

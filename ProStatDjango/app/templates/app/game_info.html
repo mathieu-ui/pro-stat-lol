@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Statistiques de la partie</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f9;
+            color: #333;
+            margin: 0;
+            padding: 0;
+            line-height: 1.6;
+        }
+
+        h1 {
+            text-align: center;
+            margin-top: 20px;
+            color: #2c3e50;
+        }
+
+        h2 {
+            text-align: center;
+            margin-top: 30px;
+            color: #34495e;
+            text-decoration: underline;
+        }
+
+        .teams-container {
+            display: flex;
+            justify-content: space-evenly;
+            margin-top: 30px;
+            padding: 0 20px;
+        }
+
+        .team {
+            width: 45%;
+            padding: 15px;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        .team.winner {
+            background-color: #d4edda; /* Légère couleur verte pour l'équipe gagnante */
+        }
+
+        .team.loser {
+            background-color: #f8d7da; /* Légère couleur rouge pour l'équipe perdante */
+        }
+
+        .team h3 {
+            color: #2980b9;
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        ul {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+
+        ul > li {
+            background: #ffffff;
+            margin: 15px 0;
+            padding: 15px;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            transition: transform 0.2s;
+        }
+
+        ul ul {
+            margin-top: 10px;
+            padding-left: 20px;
+        }
+
+        ul ul li {
+            background: none;
+            box-shadow: none;
+            padding: 5px 0;
+            border-bottom: 1px solid #ddd;
+        }
+
+        ul ul li:last-child {
+            border-bottom: none;
+        }
+
+        li > h4 {
+            margin: 0;
+            color: #2980b9;
+        }
+
+        body::-webkit-scrollbar {
+            width: 10px;
+        }
+
+        body::-webkit-scrollbar-track {
+            background: #f4f4f9;
+        }
+
+        body::-webkit-scrollbar-thumb {
+            background: #2980b9;
+            border-radius: 5px;
+        }
+
+        body::-webkit-scrollbar-thumb:hover {
+            background: #1f618d;
+        }
+    </style>
+</head>
+<body>
+    <h1>Statistiques de la partie</h1>
+
+    <h2>Informations générales</h2>
+    <ul>
+        <li>Mode de jeu : {{ general_info.mode_de_jeu }}</li>
+        <li>Durée de la partie : {{ general_info.duree_partie }}    </li>
+    </ul>
+
+    <h2>Informations des équipes</h2>
+
+    <div class="teams-container">
+        <!-- Team 1 -->
+        <div class="team {% if game_winner == 1 %}winner{% elif game_winner == 2 %}loser{% endif %}">
+            <h3>Team 1</h3>
+            <ul>
+                {% for player in team_1 %}
+                    <li>
+                        <h4>{{ player.nom_invocateur }}</h4>
+                        <ul>
+                            <li>Position : {{ player.position }}</li>
+                            <li>Niveau atteint : {{ player.niveau_atteint }}</li>
+                            <li>KDA : {{ player.kda }}</li>
+                            <li>Gold gagné : {{ player.gold_gagne }}</li>
+                            <li>Dégâts infligés aux champions : {{ player.degats_champions }}</li>
+                            <li>Score de vision : {{ player.vision_score }}</li>
+                        </ul>
+                    </li>
+                {% endfor %}
+            </ul>
+        </div>
+
+        <!-- Team 2 -->
+        <div class="team {% if game_winner == 2 %}winner{% elif game_winner == 1 %}loser{% endif %}">
+            <h3>Team 2</h3>
+            <ul>
+                {% for player in team_2 %}
+                    <li>
+                        <h4>{{ player.nom_invocateur }}</h4>
+                        <ul>
+                            <li>Position : {{ player.position }}</li>
+                            <li>Niveau atteint : {{ player.niveau_atteint }}</li>
+                            <li>KDA : {{ player.kda }}</li>
+                            <li>Gold gagné : {{ player.gold_gagne }}</li>
+                            <li>Dégâts infligés aux champions : {{ player.degats_champions }}</li>
+                            <li>Score de vision : {{ player.vision_score }}</li>
+                        </ul>
+                    </li>
+                {% endfor %}
+            </ul>
+        </div>
+    </div>
+</body>
+</html>
