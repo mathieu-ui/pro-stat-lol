@@ -1,5 +1,6 @@
 import requests
 from urllib.parse import quote
+import os
 
 API_KEY = "RGAPI-7b58915b-e604-45ba-9237-068907d5a245"
 
@@ -20,6 +21,8 @@ def get_puuid_by_riot_id(name, tag):
         a = response.json()
         print("PUUID OK")
         return a["puuid"]
+    elif response.status_code == 403:
+        return "token"
     else:
         print(f"Erreur {response.status_code}: {response.text}")
         return None
@@ -37,14 +40,25 @@ def get_all_champs_infos(puuid):
     return response.json()
 
 def trouver_nom_par_id(id_recherche):
+
+    return_list = []
     import csv
     csv_path = "app/champions.csv"
     with open(csv_path, 'r') as csvfile:
         reader = csv.DictReader(csvfile)
         for row in reader:
             if row['key'] == str(id_recherche):
-                return row['name']
-    return f"ID {id_recherche}"
+                return_list.append(row['name'])
+                break
+    files = []
+    for fichier in os.listdir("app/static/loading"):
+        if row['name'] in fichier:  # Vérification si la chaîne est dans le nom du fichier
+            files.append(f"static/loading/{fichier}")
+            print(fichier)
+    if len(files) == 0:
+        files.append("static/teemo.webp")
+    return_list.append(files[0])
+    return return_list
 
 def get_last_10_matches(puuid):
     url = f"https://europe.api.riotgames.com/lol/match/v5/matches/by-puuid/{puuid}/ids?api_key={API_KEY}"
@@ -56,6 +70,7 @@ def get_last_10_matches(puuid):
     else:
         print(f"Error {response.status_code}: {response.text}")
         return []
+
 
 """riot_name = "Mr Bark"  # Nom du joueur
 riot_tag = "turbo"  # Tag du joueur
