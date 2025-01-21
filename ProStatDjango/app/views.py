@@ -36,7 +36,7 @@ def match_view(request):
         puuid = lol.get_puuid_by_riot_id(riot_name, riot_tag)
         if puuid:
             matches = lol.get_last_10_matches(puuid)
-            return render(request, 'match.html', {'riotid': riot_name, 'matches': matches})
+            return render(request, 'app/match.html', {'riotid': riot_name, 'matches': matches})
         else:
-            return render(request, 'index.html', {'error': "Impossible de récupérer les matchs pour cet ID"})
-    return render(request, 'index.html')
+            return render(request, 'app/index.html', {'error': "Impossible de récupérer les matchs pour cet ID"})
+    return render(request, 'app/index.html')
