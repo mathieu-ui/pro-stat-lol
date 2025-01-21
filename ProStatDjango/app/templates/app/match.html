@@ -73,13 +73,16 @@ a:hover {
     </style>
 </head>
 <body>
-<h1>Riot ID : {{ riotid }}</h1>
+
+{% if verif_flag %}
+<div id="flag" hidden>{{ verif_flag }}</div>
+{% endif %}
 
 {% if matches %}
-    <h2>15 Derniers Matchs :</h2>
+    <h2>Les derniers matchs de {{ riotid }} : </h2>
     <ul>
         {% for match in matches %}
-            <li><a href="game/{{ match }}">{{ match }}</a></li>
+            <li><a href="game/{{ match.0 }}">Partie de {{ match.3 }} du {{ match.1 }} en {{ match.2 }}</a></li>
         {% endfor %}
     </ul>
 {% else %}
