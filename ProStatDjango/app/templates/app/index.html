@@ -78,7 +78,7 @@
 
         <!-- Formulaire pour afficher les 10 derniers matchs -->
         <form action="action" method="post">
-            <input type="hidden" name="csrfmiddlewaretoken" value="FqMlsFT12bSHyCTLwE2Kx838Xv3OlV9mjs8LvlMJf6UVizL9MBaIwaVdorVxFmHO">
+            {% csrf_token %}
             <label for="id">Nom du joueur :</label>
             <input type="text" name="id" placeholder="Id" value="DaiKaaannn" required>
             <label for="tag">Tag :</label>

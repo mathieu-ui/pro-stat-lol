@@ -46,5 +46,5 @@ jobs:
 
       - name: Push Docker image
         run: |
-          docker tag pro-stat-lol:${{ github.sha }} ${{ secrets.DOCKER_USERNAME }}/pro-stat-lol:${{ github.sha }}
-          docker push ${{ secrets.DOCKER_USERNAME }}/pro-stat-lol:${{ github.sha }}
+            docker tag pro-stat-lol:${{ github.sha }} ${{ secrets.DOCKER_USERNAME }}/pro-stat-lol:${{ github.ref_name }}
+            docker push ${{ secrets.DOCKER_USERNAME }}/pro-stat-lol:${{ github.ref_name }}
