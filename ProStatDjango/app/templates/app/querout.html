@@ -2,51 +2,78 @@
 <html lang="fr">
 <head>
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Masteries</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f9;
+            color: #333;
+            margin: 0;
+            padding: 20px;
+        }
+
+        h1 {
+            text-align: center;
+            color: #444;
+        }
+
+        .photo-container {
+            position: relative;
+            width: 100%;
+            max-width: 308px; /* Limite la largeur pour les grands écrans */
+            height: 560px;
+            margin: 20px auto; /* Centre les conteneurs */
+            overflow: hidden;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Ombre douce */
+        }
+
+        .background {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .overlay {
+            position: absolute;
+            top: 55%;
+            left: 50%;
+            transform: translateX(-50%);
+            height: 160px;
+            object-fit: contain;
+        }
+
+        .text-overlay {
+            position: absolute;
+            bottom: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            background-color: rgba(0, 0, 0, 0.6);
+            color: white;
+            padding: 10px 15px;
+            border-radius: 5px;
+            font-size: 20px;
+            text-align: center;
+            width: 90%;
+            font-weight: bold;
+        }
+
+        p {
+            margin: 5px 0;
+        }
+
+        hr {
+            border: 0;
+            border-top: 1px solid #ddd;
+            margin: 20px auto;
+            width: 80%;
+        }
+    </style>
 </head>
-
-<style>
-
-.photo-container {
-  position: relative;
-  width: 400px; /* Largeur de la div */
-  height: 300px; /* Hauteur de la div */
-  overflow: hidden; /* Cache les débordements */
-}
-
-.background {
-  position: absolute; /* Permet un positionnement précis */
-  top: 50%; /* Centre verticalement */
-  left: 50%; /* Centre horizontalement */
-  transform: translate(-50%, -50%); /* Centrage exact */
-}
-
-.overlay {
-  position: absolute;
-  top: 0; /* Alignement en haut */
-  left: 50%; /* Centre horizontalement */
-  transform: translateX(-50%);
-  height: 100px; /* Définit la hauteur de l'image superposée */
-  object-fit: contain; /* Garde les proportions de l'image */
-}
-
-.text-overlay {
-  position: absolute;
-  bottom: 20px; /* Positionne le texte en bas avec une marge */
-  left: 50%; /* Centre horizontalement */
-  transform: translateX(-50%); /* Ajuste le centrage horizontal */
-  background-color: rgba(0, 0, 0, 0.5); /* Fond semi-transparent */
-  color: white; /* Couleur du texte */
-  padding: 10px 20px; /* Ajoute un espacement autour du texte */
-  border-radius: 5px; /* Arrondi les coins du fond */
-  font-family: Arial, sans-serif; /* Police du texte */
-  font-size: 16px; /* Taille du texte */
-  text-align: center; /* Centre le texte */
-}
-
-
-</style>
-
 <body>
 
 <h1>Riot ID : {{riotid}}</h1>
@@ -54,38 +81,38 @@
 {% for c in all_champs %}
 
 <div class="photo-container">
-<img src="{{c.2}}" style="height: 300px" class="background">
+    <img src="{{c.2}}" alt="Champion Image" class="background">
 
-  {% if c.1 >= 100000 %}
-    <img src="static/m10.webp" height="75" class="overlay">
-  {% elif c.1 >= 90000 %}
-    <img src="static/m9.webp" height="75" class="overlay">
-  {% elif c.1 >= 80000 %}
-    <img src="static/m8.webp" height="75" class="overlay">
-  {% elif c.1 >= 70000 %}
-    <img src="static/m7.webp" height="75" class="overlay">
-  {% elif c.1 >= 60000 %}
-    <img src="static/m6.webp" height="75" class="overlay">
-  {% elif c.1 >= 50000 %}
-    <img src="static/m5.webp" height="75" class="overlay">
-  {% elif c.1 >= 40000 %}
-    <img src="static/m4.webp" height="75" class="overlay">
-  {% elif c.1 >= 30000 %}
-    <img src="static/m3.webp" height="75" class="overlay">
-  {% elif c.1 >= 20000 %}
-    <img src="static/m2.webp" height="75" class="overlay">
-  {% else %}
-    <img src="static/m1.webp" height="75"class="overlay">
-  {% endif %}
+    {% if c.1 >= 100000 %}
+        <img src="static/m10.webp" alt="Mastery Level 10" class="overlay">
+    {% elif c.1 >= 90000 %}
+        <img src="static/m9.webp" alt="Mastery Level 9" class="overlay">
+    {% elif c.1 >= 80000 %}
+        <img src="static/m8.webp" alt="Mastery Level 8" class="overlay">
+    {% elif c.1 >= 70000 %}
+        <img src="static/m7.webp" alt="Mastery Level 7" class="overlay">
+    {% elif c.1 >= 60000 %}
+        <img src="static/m6.webp" alt="Mastery Level 6" class="overlay">
+    {% elif c.1 >= 50000 %}
+        <img src="static/m5.webp" alt="Mastery Level 5" class="overlay">
+    {% elif c.1 >= 40000 %}
+        <img src="static/m4.webp" alt="Mastery Level 4" class="overlay">
+    {% elif c.1 >= 30000 %}
+        <img src="static/m3.webp" alt="Mastery Level 3" class="overlay">
+    {% elif c.1 >= 20000 %}
+        <img src="static/m2.webp" alt="Mastery Level 2" class="overlay">
+    {% else %}
+        <img src="static/m1.webp" alt="Mastery Level 1" class="overlay">
+    {% endif %}
 
-  <div class="text-overlay">
-    <p>{{c.0}}</p>
-    <p>MP : {{c.1}}</p>
-  </div>
+    <div class="text-overlay">
+        <p>{{c.0}}</p>
+        <p>MP : {{c.1}}</p>
+    </div>
 </div>
-
 
 <hr>
 {% endfor %}
+
 </body>
 </html>
