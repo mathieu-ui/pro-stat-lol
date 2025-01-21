@@ -207,5 +207,5 @@ def add_token(request):
         return render(request, template_name='app/error.html', context={'error': error, 'emote': emote})
     else:
         error = "Le token fourni fonctionne correctement !"
-        emote = "blitz.webp"
+        emote = "lux.webp"
         return render(request, template_name='app/error.html', context={'error': error, 'emote': emote})
