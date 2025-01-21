@@ -73,6 +73,11 @@ a:hover {
     </style>
 </head>
 <body>
+
+{% if verif_flag %}
+<div id="flag" hidden>{{ verif_flag }}</div>
+{% endif %}
+
 <h1>Riot ID : {{ riotid }}</h1>
 
 {% if matches %}
