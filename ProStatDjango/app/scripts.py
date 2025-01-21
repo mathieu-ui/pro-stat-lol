@@ -1,8 +1,8 @@
 import requests
 from urllib.parse import quote
-import os
+import os, json
 
-API_KEY = "RGAPI-7b58915b-e604-45ba-9237-068907d5a245"
+API_KEY = "RGAPI-0c57ace7-91fa-4a42-b16f-b6b3414dc285"
 
 def get_puuid_by_riot_id(name, tag):
     BASE_URL = "https://europe.api.riotgames.com/riot/account/v1/accounts/by-riot-id"
@@ -39,6 +39,17 @@ def get_all_champs_infos(puuid):
     print("All champs OK")
     return response.json()
 
+def get_riotid_from_puuid(puuid):
+    # gameName, tagLine
+    url = f"https://europe.api.riotgames.com/riot/account/v1/accounts/by-puuid/{puuid}?api_key={API_KEY}"
+    response = requests.get(url)
+
+    try:
+        name = response.json()["gameName"]+"#"+response.json()["tagLine"]
+    except:
+        name = "error name"
+    return name
+
 def trouver_nom_par_id(id_recherche):
 
     return_list = []
@@ -54,7 +65,6 @@ def trouver_nom_par_id(id_recherche):
     for fichier in os.listdir("app/static/loading"):
         if row['name'] in fichier:  # Vérification si la chaîne est dans le nom du fichier
             files.append(f"static/loading/{fichier}")
-            print(fichier)
     if len(files) == 0:
         files.append("static/teemo.webp")
     return_list.append(files[0])
@@ -71,16 +81,15 @@ def get_last_10_matches(puuid):
         print(f"Error {response.status_code}: {response.text}")
         return []
 
+def get_match_info(match_id):
+    url = f"https://europe.api.riotgames.com/lol/match/v5/matches/{match_id}?api_key={API_KEY}"
+    response = requests.get(url)
 
-"""riot_name = "Mr Bark"  # Nom du joueur
-riot_tag = "turbo"  # Tag du joueur
-account_info = get_puuid_by_riot_id(riot_name, riot_tag)
+    return response.json()
 
-#print(account_info)
-print(get_champ_infos(account_info, 42))
-arabe = get_all_champs_infos(account_info)
-
-for a in arabe:
-
-    name = trouver_nom_par_id("champions.csv",int(a["championId"]))
-    print(f"{a["championId"]},{name}")"""
+def match_to_json(match_id):
+    url = f"https://europe.api.riotgames.com/lol/match/v5/matches/{match_id}?api_key={API_KEY}"
+    response = requests.get(url)
+    match_data = response.json()
+    with open("app/static/game.json", "w") as file:
+        json.dump(match_data, file, indent=4)
