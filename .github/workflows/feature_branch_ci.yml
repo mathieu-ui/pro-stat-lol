@@ -1,40 +1,40 @@
-# Feature Branch Workflow
-default:
+name: Feature Branch Workflow
+
+on:
+  push:
+    branches-ignore:
+      - main
+      - /v\d+\.\d+\.\d+/ # Ignore versioned tags
+
+jobs:
+  test:
     runs-on: ubuntu-latest
-  stages:
-    - test
-  feature_tests:
-    stage: test
+
     steps:
       - name: Checkout code
         uses: actions/checkout@v3
-  
+
       - name: Set up Python
         uses: actions/setup-python@v4
         with:
           python-version: '3.12'
-  
+
       - name: Install dependencies
         run: |
           python -m pip install --upgrade pip
           pip install -r requirements.txt
-  
+
       - name: Build Docker image
         run: |
           docker build -t my-django-app:${{ github.sha }} .
-  
+
       - name: Run Docker container
         run: |
           docker run -d -p 8000:8000 --name test-container my-django-app:${{ github.sha }}
           sleep 10
-          curl -f http://127.0.0.1:8000 || (echo "Server not working" && exit 1)
-  
+          curl -f http://localhost:8000 || (echo "Feature not working" && exit 1)
+
       - name: Clean up Docker container
         run: |
           docker stop test-container
           docker rm test-container
-    only:
-      - branches
-    except:
-      - main
-      - /^v\d+\.\d+\.\d+$/
