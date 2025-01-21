@@ -43,3 +43,15 @@ def masteries(request):
         lil_list.clear()
 
     return render(request, 'app/querout.html', context={'output':output, 'all_champs':big_list, 'riotid':riotid})
+
+def match_view(request):
+    if request.method == "POST":
+        riot_name = request.POST.get("id")
+        riot_tag = request.POST.get("tag")
+        puuid = lol.get_puuid_by_riot_id(riot_name, riot_tag)
+        if puuid:
+            matches = lol.get_last_10_matches(puuid)
+            return render(request, 'app/match.html', {'riotid': riot_name, 'matches': matches})
+        else:
+            return render(request, 'app/index.html', {'error': "Impossible de récupérer les matchs pour cet ID"})
+    return render(request, 'app/index.html')

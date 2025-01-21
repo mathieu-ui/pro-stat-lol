@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <title>Résultats des matchs</title>
+</head>
+<body>
+<h1>Riot ID : {{ riotid }}</h1>
+
+{% if matches %}
+    <h2>10 Derniers Matchs :</h2>
+    <ul>
+        {% for match in matches %}
+            <li>Match ID : {{ match }}</li>
+        {% endfor %}
+    </ul>
+{% else %}
+    <p>Aucun match trouvé.</p>
+{% endif %}
+</body>
+</html>
