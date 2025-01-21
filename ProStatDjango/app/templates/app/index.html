@@ -1,19 +1,38 @@
 <!DOCTYPE html>
 <html lang="fr">
 <head>
-    <title>API Query</title>
+    <title>API Query - ProStat</title>
 </head>
 <body>
-<h1>Take care there are bobers here !</h1>
+    <h1>Bienvenue sur ProStat</h1>
 
-
-<form action="out" method="post">
-    {% csrf_token %}
-    <input type="text" name="id" placeholder="Id" value="Mr Bark">#
-    <input type="text" name="tag" placeholder="Tag" value="turbo" maxlength="5">
-    <br>
-    <button type="submit">Afficher les masteries</button>
+    <!-- Formulaire pour afficher les maîtrises -->
+    <form action="out" method="post">
+        {% csrf_token %}
+        <label for="id">Nom du joueur :</label>
+        <input type="text" name="id" placeholder="Id" value="Mr Bark" required>
+        <label for="tag">Tag :</label>
+        <input type="text" name="tag" placeholder="Tag" value="turbo" maxlength="5" required>
+        <br>
+        <button type="submit">Afficher les maîtrises</button>
     </form>
-<h2 style="color : red;">{{ error }}</h2>
+
+    <hr>
+
+    <!-- Formulaire pour afficher les 10 derniers matchs -->
+    <form action="match" method="post">
+        {% csrf_token %}
+        <label for="id">Nom du joueur :</label>
+        <input type="text" name="id" placeholder="Id" value="Mr Bark" required>
+        <label for="tag">Tag :</label>
+        <input type="text" name="tag" placeholder="Tag" value="turbo" maxlength="5" required>
+        <br>
+        <button type="submit">Afficher les 10 derniers matchs</button>
+    </form>
+
+    <!-- Section pour afficher les erreurs -->
+    {% if error %}
+    <h2 style="color: red;">Erreur : {{ error }}</h2>
+    {% endif %}
 </body>
 </html>

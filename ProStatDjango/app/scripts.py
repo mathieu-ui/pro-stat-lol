@@ -36,7 +36,6 @@ def get_all_champs_infos(puuid):
     print("All champs OK")
     return response.json()
 
-
 def trouver_nom_par_id(id_recherche):
     import csv
     csv_path = "app/champions.csv"
@@ -47,6 +46,16 @@ def trouver_nom_par_id(id_recherche):
                 return row['name']
     return f"ID {id_recherche}"
 
+def get_last_10_matches(puuid):
+    url = f"https://europe.api.riotgames.com/lol/match/v5/matches/by-puuid/{puuid}/ids?api_key={API_KEY}"
+    response = requests.get(url)
+    print(response)
+    if response.status_code == 200:
+        print("Matches retrieved successfully")
+        return response.json()
+    else:
+        print(f"Error {response.status_code}: {response.text}")
+        return []
 
 """riot_name = "Mr Bark"  # Nom du joueur
 riot_tag = "turbo"  # Tag du joueur
