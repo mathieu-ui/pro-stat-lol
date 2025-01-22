@@ -1,82 +1,75 @@
-Documentation : Code de Base Django - Intégration avec l'API Riot Games
+# Pro-Stat LoL
 
-Ce projet est un code de base développé avec Django qui intègre l’API de Riot Games pour fournir des fonctionnalités interactives liées aux données des joueurs de League of Legends.
+This project is a Django-based web application designed to interact with the Riot Games API, providing users with personalized statistics and information about their League of Legends gameplay.
 
-⚠️ Important : Le token API fourni par Riot Games n’est valide que pendant 24 heures. Pensez à le régénérer régulièrement pour garantir le bon fonctionnement des requêtes.
-Fonctionnalités principales :
-1. Récupération des maîtrises de champions
+## Key Features
 
-    Objectif : Afficher les maîtrises des différents champions d’un joueur.
-    Entrées requises :
-        Nom d’utilisateur (summoner name).
-        Tag utilisateur (region tag, ex : EUW, NA, etc.).
-    Détails :
-        Le système interroge l’API de Riot Games pour récupérer les données de maîtrises associées à un joueur, y compris les champions les plus joués et leurs scores.
+1. **Personal Riot Games Developer Token Integration**:
+   - Users can input their personal Riot Games developer token to make requests to the Riot Games API.
+   - To obtain a token, create an account on the [Riot Games Developer Portal](https://developer.riotgames.com/).
+   - After acquiring the token, navigate to the main page of the application and input your token.
 
-2. Informations sur les 10 dernières parties
+2. **Summoner Mastery Points Retrieval**:
+   - Users can search for a summoner by their name and retrieve mastery points for each champion.
+   - To use this feature:
+     - Go to the main page.
+     - Enter the summoner's name and region tag (e.g., EUW, NA).
+     - Select the "Masteries" option.
+     - A pre-filled field is available as an example.
+     - *Note: The application uses the EUW server by default.*
 
-    Objectif : Fournir des statistiques détaillées sur les 10 dernières parties jouées par un utilisateur.
-    Entrées requises :
-        Nom d’utilisateur (summoner name).
-        Tag utilisateur (region tag).
-    Détails :
-        Les informations incluent : résultats des matchs, performances (kills, deaths, assists), et rôles joués.
-        Permet une analyse rapide des tendances et performances récentes du joueur.
+3. **Summoner Match History**:
+   - Users can search for a summoner by their name and access their recent match history.
+   - To use this feature:
+     - Go to the main page.
+     - Enter the summoner's name and region tag.
+     - Select the "Matches" option.
+     - A pre-filled field is available as an example.
+     - *Note: The application uses the EUW server by default.*
 
-Objectifs du projet :
+## Technical Details
 
-    Offrir une interface simple et efficace pour interagir avec l’API de Riot Games.
-    Faciliter l’analyse des performances d’un joueur à partir des données publiques disponibles via l’API.
-    Fournir un point de départ extensible pour développer des fonctionnalités supplémentaires liées à League of Legends.
+- **Python Version**: 3.12
+- **Docker Integration**:
+  - The application runs within a Docker container for ease of deployment.
+- **Dependencies**:
+  - All required packages are listed in the `requirements.txt` file.
+- **Branch Protection**:
+  - The `main` branch is protected. Direct pushes are not allowed.
+  - To contribute:
+    - Create a new branch.
+    - Submit a pull request.
+    - Await code review and approval.
 
-Prérequis et configuration :
+## Important Notes
 
-    Clé API Riot Games :
-        Obtenez une clé sur le portail des développeurs Riot Games.
-        Remplacez l’ancienne clé dans le fichier de configuration dès que celle-ci expire (validité : 24 heures).
+- **API Token Validity**:
+  - The Riot Games API token is valid for 24 hours. Ensure you regenerate and update your token regularly to maintain functionality.
 
-    Environnement Django :
-        Installez les dépendances nécessaires :
+## Getting Started (TAGED VERSION)
 
-        pip install django requests
+   ```bash
+   docker run -p 8000:8000 mathieupro/pro-stat-lol:[tag]
+   ```
 
-    Fichier de configuration :
-        Mettez à jour les paramètres suivants dans le fichier de configuration du projet :
-            Clé API.
-            Paramètres régionaux (si applicable).
+## Getting Started (Local Development)
 
-Meilleures pratiques :
+1. **Clone the Repository**:
+   ```bash
+   git clone https://github.com/mathieu-ui/pro-stat-lol.git
+   ```
+2. **Navigate to the Project Directory**:
+   ```bash
+   cd pro-stat-lol
+   ```
+3. **Build and Run the Docker Container**:
+   ```bash
+   docker build -t pro-stat-lol .
+   docker run -p 8000:8000 pro-stat-lol
+   ```
+4. **Access the Application**:
+   - Open your browser and navigate to `http://localhost:8000`.
 
-    Régénérer le token API toutes les 24 heures pour éviter les erreurs d’authentification.
-    Gérer les erreurs d’API comme les requêtes dépassant les limites de taux (rate limiting) ou les entrées utilisateur invalides.
-    Sécuriser la clé API en utilisant des variables d’environnement ou des fichiers protégés.
+---
 
-Conclusion :
-
-Ce projet Django constitue une base solide pour explorer et utiliser les données de l’API Riot Games. Les fonctionnalités incluses permettent de visualiser les performances des joueurs et d’étudier leurs maîtrises de champions, tout en étant facilement extensible pour ajouter de nouvelles capacités.
-
-
-Pour la partie Github:
-
-La branche main est protégée pour garantir la stabilité, la sécurité et la qualité du code. Ces protections assurent que seules des modifications validées et sécurisées peuvent y être intégrées, tout en évitant les erreurs accidentelles ou les actions non autorisées.
-Règles principales :
-
-    Suppression de la branche interdite
-        Objectif : Empêcher toute suppression accidentelle.
-        Détail : Seuls les utilisateurs disposant de permissions spéciales peuvent supprimer cette branche.
-
-    Exigence de Pull Requests
-        Objectif : Vérifier les modifications avant de les fusionner.
-        Détail : Toutes les modifications doivent passer par une pull request, être révisées et validées avant leur intégration dans main.
-
-    Pushs forcés interdits
-        Objectif : Préserver l'historique des commits et éviter les modifications non intentionnelles.
-        Détail : Les pushs forcés sont bloqués pour garantir l'intégrité du code.
-
-Objectifs de ces protections :
-
-    Maintenir la qualité du code : En vérifiant chaque contribution via des pull requests.
-    Préserver l'intégrité du dépôt : En bloquant les suppressions et les pushs forcés.
-    Encourager la collaboration : En instaurant un processus de révision systématique pour chaque changement.
-
-Ces règles assurent que la branche main, cœur du projet, reste stable, fonctionnelle, et protégée contre les erreurs humaines ou malveillantes, tout en favorisant un travail d'équipe structuré et efficace.
+*Note: Ensure you regularly update your Riot Games API token to maintain access to the API services.*

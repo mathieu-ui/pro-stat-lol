@@ -33,6 +33,10 @@ jobs:
           sleep 10
           curl -f http://localhost:8000 || (echo "Tests failed" && exit 1)
 
+      - name: Run tests
+        run: |
+          python test.py
+
       - name: Clean up Docker container
         run: |
           docker stop test-container
@@ -46,5 +50,5 @@ jobs:
 
       - name: Push Docker image
         run: |
-          docker tag pro-stat-lol:${{ github.sha }} ${{ secrets.DOCKER_USERNAME }}/pro-stat-lol:latest
-          docker push ${{ secrets.DOCKER_USERNAME }}/pro-stat-lol:latest
+          docker tag pro-stat-lol:${{ github.sha }} ${{ secrets.DOCKER_USERNAME }}/pro-stat-lol:${{ github.sha }}
+          docker push ${{ secrets.DOCKER_USERNAME }}/pro-stat-lol:${{ github.sha }}
