@@ -32,6 +32,10 @@ jobs:
           docker run -d -p 8000:8000 --name test-container pro-stat-lol:${{ github.sha }}
           sleep 10
           curl -f http://localhost:8000 || (echo "Tests failed" && exit 1)
+     
+      - name: Run tests
+        run: |
+          python test.py
 
       - name: Clean up Docker container
         run: |

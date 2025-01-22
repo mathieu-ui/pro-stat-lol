@@ -34,6 +34,10 @@ jobs:
           sleep 10
           curl -f http://localhost:8000 || (echo "Feature not working" && exit 1)
 
+      - name: Run tests
+        run: |
+          python test.py
+        
       - name: Clean up Docker container
         run: |
           docker stop test-container
