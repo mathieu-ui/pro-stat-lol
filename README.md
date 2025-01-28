@@ -72,4 +72,11 @@ This project is a Django-based web application designed to interact with the Rio
 
 ---
 
-*Note: Ensure you regularly update your Riot Games API token to maintain access to the API services.*
+## Getting API Token
+
+Go to : https://developer.riotgames.com/ and login with the following creds :
+
+Username : Protateur<br>
+Password : XwBpquEvez$0wqX^Fq6bcvrSU
+
+At top right corner on "my account" -> "dashboard" you can claim the token.
