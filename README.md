@@ -80,3 +80,10 @@ Username : Protateur<br>
 Password : XwBpquEvez$0wqX^Fq6bcvrSU
 
 At top right corner on "my account" -> "dashboard" you can claim the token.
+
+## Automated tests
+
+In order to test the app we're using Selenium to check if the 2 features are working.<br>
+When Selenium finds a hidden html element with the ID "flag" the test is OK.<br>
+This html element is on the web page only if there are no error during the request process.<br>
+If the current token on the commit is expired the tests will fail.
