@@ -9,7 +9,7 @@ else:
     BASE_PATH = ""
 
 
-JSON_PATH = f"{BASE_PATH}app/config.json"
+JSON_PATH = f"app/config.json"
 
 def get_token():
     with open(JSON_PATH, 'r') as fichier:

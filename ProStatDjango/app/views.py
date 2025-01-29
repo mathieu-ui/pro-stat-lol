@@ -17,8 +17,8 @@ JSON_PATH = f"{BASE_PATH}config.json"
 def index(request):
 
     query = lol.get_puuid_by_riot_id("Mr Bark", "turbo")
-
-    if query == "token":
+    print(lol.get_puuid_by_riot_id("Mr Bark", "turbo"))
+    if query == None or query == 'token':
         token_up = 0
     else:
         token_up = 1
@@ -178,7 +178,7 @@ def add_token(request):
 
     query = lol.get_puuid_by_riot_id("Mr Bark","turbo")
 
-    if query == "token":
+    if query == None or query == 'token':
         error = "Le token fourni n'est pas correct ! "
         emote = "blitz.webp"
         return render(request, template_name='app/error.html', context={'error': error, 'emote': emote})
