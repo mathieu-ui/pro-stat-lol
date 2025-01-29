@@ -1,13 +1,6 @@
 import requests
 from urllib.parse import quote
 import os, json
-import platform
-
-if platform.system() == "Windows":
-    BASE_PATH = "ProStatDjango/"
-else:
-    BASE_PATH = ""
-
 
 JSON_PATH = f"app/config.json"
 
@@ -78,7 +71,7 @@ def trouver_nom_par_id(id_recherche):
 
     return_list = []
     import csv
-    csv_path = f"{BASE_PATH}app/champions.csv"
+    csv_path = f"app/champions.csv"
     with open(csv_path, 'r') as csvfile:
         reader = csv.DictReader(csvfile)
         for row in reader:
@@ -86,7 +79,7 @@ def trouver_nom_par_id(id_recherche):
                 return_list.append(row['name'])
                 break
     files = []
-    for fichier in os.listdir(f"{BASE_PATH}app/static/loading"):
+    for fichier in os.listdir(f"app/static/loading"):
         if row['name'] in fichier:  # Vérification si la chaîne est dans le nom du fichier
             files.append(f"static/loading/{fichier}")
     if len(files) == 0:
@@ -115,5 +108,5 @@ def match_to_json(match_id):
     url = f"https://europe.api.riotgames.com/lol/match/v5/matches/{match_id}?api_key={get_token()}"
     response = requests.get(url)
     match_data = response.json()
-    with open(f"{BASE_PATH}app/static/game.json", "w") as file:
+    with open(f"app/static/game.json", "w") as file:
         json.dump(match_data, file, indent=4)
