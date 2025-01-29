@@ -2,21 +2,22 @@ import requests
 from urllib.parse import quote
 import os, json
 
+JSON_PATH = "ProStatDjango/app/config.json"
 
 def get_token():
-    with open("app/config.json", 'r') as fichier:
+    with open(JSON_PATH, 'r') as fichier:
         data = json.load(fichier)
     return data.get('token')
 
 def replace_token(new_token):
-    with open("app/config.json", 'r') as fichier:
+    with open(JSON_PATH, 'r') as fichier:
         data = json.load(fichier)
 
     # Modifier la valeur de "token"
     data['token'] = new_token
 
     # Écrire les modifications dans le fichier JSON
-    with open("app/config.json", 'w') as fichier:
+    with open(JSON_PATH, 'w') as fichier:
         json.dump(data, fichier, indent=4)
 
 
@@ -70,7 +71,7 @@ def trouver_nom_par_id(id_recherche):
 
     return_list = []
     import csv
-    csv_path = "app/champions.csv"
+    csv_path = "ProStatDjango/app/champions.csv"
     with open(csv_path, 'r') as csvfile:
         reader = csv.DictReader(csvfile)
         for row in reader:
@@ -78,7 +79,7 @@ def trouver_nom_par_id(id_recherche):
                 return_list.append(row['name'])
                 break
     files = []
-    for fichier in os.listdir("app/static/loading"):
+    for fichier in os.listdir("ProStatDjango/app/static/loading"):
         if row['name'] in fichier:  # Vérification si la chaîne est dans le nom du fichier
             files.append(f"static/loading/{fichier}")
     if len(files) == 0:
@@ -107,5 +108,5 @@ def match_to_json(match_id):
     url = f"https://europe.api.riotgames.com/lol/match/v5/matches/{match_id}?api_key={get_token()}"
     response = requests.get(url)
     match_data = response.json()
-    with open("app/static/game.json", "w") as file:
+    with open("ProStatDjango/app/static/game.json", "w") as file:
         json.dump(match_data, file, indent=4)

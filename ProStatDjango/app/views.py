@@ -6,6 +6,7 @@ import app.scripts as lol
 from datetime import datetime, timezone, timedelta
 import json
 
+JSON_PATH = "ProStatDjango/app/config.json"
 def index(request):
 
     query = lol.get_puuid_by_riot_id("Mr Bark", "turbo")
@@ -24,7 +25,7 @@ def error(request):
 def match_overview(request, game_code):
     # Charger les données du match en JSON
     lol.match_to_json(game_code)  # Appel de votre fonction pour générer le fichier JSON
-    file_path = "app/static/game.json"  # Chemin vers votre fichier
+    file_path = "ProStatDjango/app/static/game.json"  # Chemin vers votre fichier
     with open(file_path, "r") as file:
         data = json.load(file)
 
@@ -105,6 +106,7 @@ def redirector(request):
             lil_list = []
 
             data = lol.trouver_nom_par_id(int(c["championId"]))
+            print(data)
             lil_list.append(data[0])
             lil_list.append(c["championPoints"])
             lil_list.append(data[1])
@@ -130,8 +132,8 @@ def redirector(request):
                     match_info = []
                     lol.match_to_json(match)
 
-                    file_path = "app/static/game.json"  # Chemin vers votre fichier
-                    with open(file_path, "r") as file:
+                    file_path = JSON_PATH  # Chemin vers votre fichier
+                    with open("ProStatDjango/app/static/game.json", "r") as file:
                         data = json.load(file)
 
                     timestamp_s = data.get("info").get("gameStartTimestamp") / 1000
